@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ProductModal from '@/components/ProductModal';
@@ -14,6 +14,14 @@ export default function SearchPage() {
   const [query, setQuery] = useState('');
   const [selectedItem, setSelectedItem] = useState<SearchItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => setIsMobile(window.innerWidth < 768);
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
 
   const searchProducts = (query: string) => {
     return products.filter(product => {
@@ -121,7 +129,7 @@ export default function SearchPage() {
         </div>
       )}
 
-      {selectedItem && (
+      {selectedItem && selectedItem.type === 'product' && (
         <ProductModal
           product={selectedItem as Product}
           isOpen={isModalOpen}
@@ -129,6 +137,7 @@ export default function SearchPage() {
             setIsModalOpen(false);
             setSelectedItem(null);
           }}
+          isMobile={isMobile}
         />
       )}
     </div>

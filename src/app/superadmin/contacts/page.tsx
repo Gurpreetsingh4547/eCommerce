@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getAllContacts } from '@/lib/firebase-utils';
+import { getAllContacts, updateContactStatus } from '@/lib/local-data';
 import { useToast } from '@/components/ui/use-toast';
 
 interface Contact {

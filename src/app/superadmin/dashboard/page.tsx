@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { getProducts, getServices, getAllContacts, getSlideshow } from '@/lib/firebase-utils';
+import { getProducts, getServices, getAllContacts, getSlideshow } from '@/lib/local-data';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({

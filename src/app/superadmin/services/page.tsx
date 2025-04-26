@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { getServices, addService, updateService, deleteService } from '@/lib/firebase-utils';
+import { getServices, addService, updateService, deleteService } from '@/lib/local-data';
 
 interface Service {
   id: string;

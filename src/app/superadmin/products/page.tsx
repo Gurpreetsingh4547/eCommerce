@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getProducts, addProduct, updateProduct, deleteProduct } from '@/lib/firebase-utils';
+import { getProducts, addProduct, updateProduct, deleteProduct } from '@/lib/local-data';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

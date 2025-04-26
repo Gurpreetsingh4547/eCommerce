@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import Image from 'next/image';
-import { getSlideshow, addSlideshow, deleteSlideshow } from '@/lib/firebase-utils';
+import { getSlideshow, addSlideshow, deleteSlideshow } from '@/lib/local-data';
 
 interface Slide {
   id: string;
@@ -92,7 +92,7 @@ export default function SlideshowManagement() {
   const handleDelete = async (slide: Slide) => {
     if (window.confirm('Are you sure you want to delete this image?')) {
       try {
-        await deleteSlideshow(slide.id, slide.imageUrl);
+        await deleteSlideshow(slide.id);
         toast({
           title: "Success",
           description: "Image deleted successfully",

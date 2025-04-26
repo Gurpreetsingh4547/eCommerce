@@ -1,6 +1,8 @@
 // Local data store
 let products: any[] = [];
 let services: any[] = [];
+let contacts: any[] = [];
+let slideshow: any[] = [];
 
 // Products
 export const addProduct = async (productData: any) => {
@@ -62,8 +64,24 @@ export const addService = async (serviceData: any) => {
   return newService.id;
 };
 
-export const getServices = async () => {
-  return services;
+export const getServices = async (limitCount = 20) => {
+  return services.slice(-limitCount).reverse();
+};
+
+export const searchServices = async (searchTerm: string) => {
+  return services
+    .filter(service => 
+      service.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(0, 10);
+};
+
+export const getServiceById = async (serviceId: string) => {
+  const service = services.find(s => s.id === serviceId);
+  if (!service) {
+    throw new Error('Service not found');
+  }
+  return service;
 };
 
 export const updateService = async (serviceId: string, serviceData: any) => {
@@ -82,20 +100,50 @@ export const deleteService = async (serviceId: string) => {
   services = services.filter(s => s.id !== serviceId);
 };
 
-// Contact Form Submissions
-let contactSubmissions: any[] = [];
-
-export const submitContactForm = async (formData: any) => {
-  const newSubmission = {
+// Contacts
+export const addContact = async (contactData: any) => {
+  const newContact = {
     id: Date.now().toString(),
-    ...formData,
-    status: 'new',
+    ...contactData,
+    status: 'pending',
     submittedAt: new Date().toISOString()
   };
-  contactSubmissions.push(newSubmission);
-  return newSubmission.id;
+  contacts.push(newContact);
+  return newContact.id;
 };
 
 export const getAllContacts = async () => {
-  return contactSubmissions.reverse();
+  return contacts.slice().reverse();
+};
+
+export const updateContactStatus = async (contactId: string, status: string) => {
+  const index = contacts.findIndex(c => c.id === contactId);
+  if (index === -1) {
+    throw new Error('Contact not found');
+  }
+  contacts[index] = {
+    ...contacts[index],
+    status,
+    updatedAt: new Date().toISOString()
+  };
+};
+
+// Slideshow
+export const addSlideshow = async (file: File, caption: string) => {
+  const newSlide = {
+    id: Date.now().toString(),
+    imageUrl: URL.createObjectURL(file),
+    caption,
+    createdAt: new Date().toISOString()
+  };
+  slideshow.push(newSlide);
+  return newSlide.id;
+};
+
+export const getSlideshow = async () => {
+  return slideshow.slice().reverse();
+};
+
+export const deleteSlideshow = async (id: string) => {
+  slideshow = slideshow.filter(s => s.id !== id);
 }; 
