@@ -1,0 +1,689 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+ 
+    --primary: 255 92% 57%;
+    --primary-foreground: 0 0% 100%;
+ 
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 4%;
+ 
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 8% 46%;
+ 
+    --accent: 255 92% 57%;
+    --accent-foreground: 0 0% 100%;
+ 
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 255 92% 57%;
+ 
+    --radius: 0.75rem;
+
+    --vh: 1vh;
+    --background-rgb: 255, 255, 255;
+    --border-rgb: 0, 0, 0;
+  }
+ 
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+ 
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    --background-rgb: 10, 25, 47;
+    --border-rgb: 30, 41, 59;
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-foreground font-semibold;
+  }
+  p {
+    @apply text-foreground/80;
+  }
+}
+
+@layer components {
+  /* Modal styles */
+  [data-dialog-container] {
+    @apply z-[999] !important;
+  }
+  [data-dialog-overlay] {
+    @apply z-[998] !important;
+  }
+  [data-dialog-content] {
+    @apply z-[999] !important;
+  }
+
+  .card-base {
+    @apply bg-background rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 border border-border/10 dark:bg-slate-800/50 dark:backdrop-blur-sm dark:border-slate-700/50;
+  }
+
+  .button-base {
+    @apply bg-primary text-primary-foreground rounded-[var(--radius)] px-6 py-2.5 font-medium hover:opacity-90 transition-opacity dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100;
+  }
+
+  .input-base {
+    @apply w-full px-4 py-3 rounded-[var(--radius)] bg-background border border-border/10 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/10 focus:border-primary/20 transition-all duration-200 dark:bg-slate-800/50 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-400 dark:focus:border-slate-600;
+  }
+
+  .heading-base {
+    @apply text-foreground font-semibold dark:text-slate-100;
+  }
+
+  .text-base {
+    @apply text-foreground/80 dark:text-slate-300;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    border-radius: 0.375rem;
+    transition: color 0.2s, background-color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--foreground);
+    background-color: var(--muted);
+  }
+
+  .dark .nav-link {
+    color: var(--slate-400, #94a3b8);
+  }
+
+  .dark .nav-link:hover {
+    color: var(--slate-100, #f1f5f9);
+    background-color: var(--slate-800, #1e293b);
+  }
+
+  .container-base {
+    @apply container mx-auto px-6 py-8;
+  }
+
+  .gradient-button {
+    @apply bg-primary text-primary-foreground rounded-[var(--radius)] px-6 py-2.5 font-medium hover:opacity-90 transition-opacity dark:bg-gradient-to-r dark:from-primary dark:to-secondary dark:text-white;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 2.5rem;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--muted);
+    @apply w-full px-4 py-3 rounded-[var(--radius)] bg-background border border-border/10 text-foreground shadow-sm placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/10 focus:border-primary/20 transition-all duration-200 dark:bg-slate-800/50 dark:border-slate-700 dark:text-slate-100 dark:placeholder-slate-400 dark:focus:border-slate-600;
+  }
+
+  .enquire-button {
+    @apply bg-primary text-primary-foreground rounded-[var(--radius)] px-6 py-2.5 font-medium hover:opacity-90 transition-opacity flex items-center gap-2 dark:bg-gradient-to-r dark:from-primary dark:to-secondary dark:text-white;
+  }
+
+  .card {
+    @apply bg-background rounded-[var(--radius)] shadow-sm hover:shadow-md transition-all duration-200 border border-border/10 p-6 dark:bg-slate-800/50 dark:backdrop-blur-sm dark:border-slate-700/50;
+  }
+
+  .stats-card {
+    @apply bg-background rounded-[var(--radius)] shadow-sm p-6 border border-border/10 flex flex-col gap-2 dark:bg-slate-800/50 dark:border-slate-700/50;
+  }
+
+  .progress-container {
+    @apply w-full bg-secondary rounded-full h-2 overflow-hidden dark:bg-slate-700;
+  }
+
+  .progress-bar {
+    @apply h-full bg-primary rounded-full transition-all duration-300;
+  }
+
+  .date-pill {
+    @apply rounded-[var(--radius)] px-4 py-2 bg-secondary text-sm font-medium text-foreground/80 dark:bg-slate-700 dark:text-slate-200;
+  }
+
+  .icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background-color: transparent;
+    color: var(--foreground);
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .icon-button:hover {
+    background-color: var(--muted);
+  }
+
+  .dark .icon-button {
+    color: var(--slate-100, #f1f5f9);
+  }
+
+  .dark .icon-button:hover {
+    background-color: var(--slate-800, #1e293b);
+  }
+
+  .dropdown-content {
+    @apply bg-background rounded-[var(--radius)] shadow-lg border border-border/10 p-2 min-w-[180px] dark:bg-slate-800 dark:border-slate-700;
+  }
+
+  .dropdown-item {
+    @apply px-4 py-2.5 rounded-[calc(var(--radius)-0.25rem)] hover:bg-secondary transition-colors duration-200 text-foreground/80 hover:text-primary cursor-pointer dark:hover:bg-slate-700 dark:text-slate-300 dark:hover:text-white;
+  }
+
+  .contact-link {
+    @apply text-primary hover:text-primary/90 transition-colors duration-200 dark:text-slate-300 dark:hover:text-white;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold text-primary mb-6 dark:text-slate-100;
+  }
+
+  .section-description {
+    @apply text-xl text-foreground/80 max-w-2xl mx-auto dark:text-slate-300;
+  }
+
+  /* Additional utility classes for consistent styling */
+  .link {
+    @apply text-primary hover:text-primary/90 transition-colors duration-200 dark:text-slate-300 dark:hover:text-white;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium bg-primary/10 text-primary dark:bg-slate-700 dark:text-slate-300;
+  }
+
+  .divider {
+    @apply h-px w-full bg-border/10 dark:bg-slate-700/50;
+  }
+
+  .hover-card {
+    @apply hover:shadow-lg hover:border-primary/20 dark:hover:border-slate-600;
+  }
+}
+
+/* Theme colors */
+.bg-primary {
+  background-color: hsl(var(--primary));
+}
+
+.bg-secondary {
+  background-color: hsl(var(--secondary));
+}
+
+.text-primary {
+  color: hsl(var(--primary));
+}
+
+.text-secondary {
+  color: hsl(var(--secondary));
+}
+
+.border-primary {
+  border-color: hsl(var(--primary));
+}
+
+.ring-primary {
+  --tw-ring-color: hsl(var(--primary));
+}
+
+.hover-primary:hover {
+  background-color: hsl(var(--primary));
+}
+
+.focus-primary:focus {
+  border-color: hsl(var(--primary));
+  --tw-ring-color: hsl(var(--primary));
+}
+
+/* Mobile App Styles - Enhanced Version */
+@media (max-width: 768px) {
+  /* Basic mobile app setup */
+  html, body {
+    position: static;
+    overflow: auto;
+    width: auto;
+    height: auto;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* App shell with clean white background */
+  .app-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    background-color: var(--background);
+    padding: 0;
+    max-width: 100%;
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); /* Add padding for nav menu */
+  }
+
+  /* Content area with proper padding */
+  .app-content {
+    flex: 1;
+    padding: 16px;
+    padding-top: 80px; /* Space for header */
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 20px)); /* Space for bottom nav */
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Clean, minimal header */
+  .app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: var(--background);
+    border-bottom: none;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 50;
+  }
+
+  /* Page title styling */
+  .app-page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--foreground);
+    margin: 0;
+    padding: 0;
+  }
+
+  .app-page-subtitle {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    margin-top: 4px;
+  }
+
+  /* Bottom navigation with prominent active item */
+  .app-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--background);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    z-index: 50;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .app-bottom-nav {
+    background-color: rgba(10, 25, 47, 0.85);
+    border-top: 1px solid var(--slate-800);
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Navigation items */
+  .app-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    height: 100%;
+    color: var(--muted-foreground);
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    position: relative;
+    padding: 0.5rem;
+  }
+
+  /* Active navigation item */
+  .app-nav-item.active {
+    color: var(--primary);
+  }
+
+  /* Active item indicator */
+  .app-nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 12px;
+    width: 4px;
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 50%;
+  }
+
+  /* Navigation icons */
+  .app-nav-item svg {
+    margin-bottom: 4px;
+    transition: all 0.2s ease;
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Active navigation icon */
+  .app-nav-item.active svg {
+    transform: scale(1.1);
+    color: var(--primary);
+  }
+
+  /* Primary action button in navigation */
+  .app-nav-primary {
+    transform: translateY(-15px);
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .app-nav-primary svg {
+    margin: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Card styling like in the reference */
+  .app-card {
+    background-color: var(--background);
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 16px;
+  }
+
+  /* Product card styling */
+  .product-card {
+    background-color: var(--background);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .product-card-image {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  .product-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .product-card-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .product-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+
+  .product-card-favorite {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--background);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Category pills */
+  .category-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 20px;
+    background-color: var(--muted);
+    color: var(--foreground);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-right: 8px;
+    white-space: nowrap;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .category-pill.active {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border: none;
+  }
+
+  /* Search bar */
+  .app-search {
+    display: flex;
+    align-items: center;
+    background-color: var(--muted);
+    border-radius: 12px;
+    padding: 0 16px;
+    height: 48px;
+    margin-bottom: 16px;
+  }
+
+  .app-search input {
+    flex: 1;
+    height: 100%;
+    background: transparent;
+    border: none;
+    font-size: 0.9rem;
+    color: var(--foreground);
+    outline: none;
+  }
+
+  .app-search svg {
+    color: var(--muted-foreground);
+    width: 20px;
+    height: 20px;
+    margin-right: 12px;
+  }
+
+  /* Cart item styling */
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .cart-item-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    margin-right: 16px;
+    background-color: var(--muted);
+  }
+
+  .cart-item-details {
+    flex: 1;
+  }
+
+  .cart-item-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .cart-item-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .cart-item-quantity {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+  }
+
+  .cart-item-quantity span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0 8px;
+  }
+
+  /* Primary button */
+  .app-button-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-radius: 28px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .app-button-primary:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+
+  /* Modal styling */
+  .app-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--background);
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .app-modal-handle {
+    width: 36px;
+    height: 5px;
+    background-color: var(--muted);
+    border-radius: 3px;
+    margin: 12px auto;
+  }
+
+  .app-modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 20px 20px;
+  }
+
+  /* Hide scrollbars */
+  .app-modal-content::-webkit-scrollbar,
+  .app-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Total section in cart */
+  .cart-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 16px;
+  }
+
+  .cart-total-label {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .cart-total-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--foreground);
+  }
+} 
