@@ -90,7 +90,7 @@ export default function ServiceModal({ service, isOpen, onClose, isMobile }: Ser
         </DialogBody>
         <DialogFooter>
           <Button
-            className="button-base w-full sm:w-auto"
+            className="w-full rounded-lg bg-primary text-white py-3 text-lg font-semibold mt-4 hover:bg-primary/90 transition"
             onClick={onClose}
             type="button"
           >
